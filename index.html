@@ -34,7 +34,7 @@ body{
 
 .container{
     width:100%;
-    max-width:1250px;
+    max-width:1300px;
     margin:auto;
     padding:25px 20px 80px;
 }
@@ -44,6 +44,8 @@ body{
     justify-content:space-between;
     align-items:center;
     margin-bottom:30px;
+    gap:20px;
+    flex-wrap:wrap;
 }
 
 .brand{
@@ -53,11 +55,11 @@ body{
 }
 
 .brand-icon{
-    font-size:38px;
+    font-size:40px;
 }
 
 .brand-name{
-    font-size:28px;
+    font-size:30px;
     font-weight:900;
 
     background:linear-gradient(to left,#60a5fa,#c084fc);
@@ -65,23 +67,31 @@ body{
     -webkit-text-fill-color:transparent;
 }
 
-.support-btn{
+.top-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.top-btn{
     background:rgba(255,255,255,0.08);
     border:1px solid rgba(255,255,255,0.1);
 
     color:white;
+
     padding:12px 20px;
 
     border-radius:16px;
 
     cursor:pointer;
+
     transition:0.3s;
 
-    font-size:16px;
+    font-size:15px;
     font-weight:700;
 }
 
-.support-btn:hover{
+.top-btn:hover{
     transform:translateY(-2px);
     border-color:#60a5fa;
     box-shadow:0 0 20px rgba(96,165,250,0.2);
@@ -89,17 +99,17 @@ body{
 
 .hero{
     text-align:center;
-    padding-top:40px;
+    padding-top:30px;
     animation:fadeUp 1s ease;
 }
 
 .hero-icon{
-    font-size:70px;
+    font-size:72px;
     margin-bottom:12px;
 }
 
 .hero h1{
-    font-size:62px;
+    font-size:64px;
     font-weight:900;
 
     background:linear-gradient(to left,#60a5fa,#c084fc);
@@ -114,26 +124,29 @@ body{
 }
 
 .search-wrapper{
-    max-width:760px;
-    margin:55px auto;
+    max-width:800px;
+    margin:55px auto 30px;
     position:relative;
 }
 
 .search-input{
     width:100%;
-
     padding:22px 70px 22px 25px;
 
     border-radius:30px;
+
     border:2px solid rgba(255,255,255,0.08);
 
     background:rgba(255,255,255,0.07);
+
     backdrop-filter:blur(15px);
 
     color:white;
+
     font-size:20px;
 
     outline:none;
+
     transition:0.3s;
 }
 
@@ -154,9 +167,69 @@ body{
     font-size:28px;
 }
 
+.filters{
+    display:none;
+
+    background:rgba(255,255,255,0.06);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:26px;
+
+    padding:24px;
+
+    margin-bottom:35px;
+
+    backdrop-filter:blur(15px);
+
+    animation:fadeUp 0.3s ease;
+}
+
+.filters.active{
+    display:block;
+}
+
+.filter-title{
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.genre-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.genre-tag{
+    padding:10px 16px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    cursor:pointer;
+
+    transition:0.25s;
+
+    font-size:14px;
+    font-weight:700;
+}
+
+.genre-tag:hover{
+    transform:translateY(-2px);
+}
+
+.genre-tag.active{
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    border-color:transparent;
+}
+
 .results{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(350px,1fr));
     gap:24px;
 }
 
@@ -185,12 +258,37 @@ body{
 }
 
 .movie-title{
-    font-size:28px;
-    font-weight:800;
-
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:12px;
     line-height:1.3;
+}
 
+.meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:16px;
+}
+
+.badge{
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+    color:#e2e8f0;
+}
+
+.description{
+    color:#cbd5e1;
+    line-height:1.7;
     margin-bottom:20px;
+    font-size:15px;
 }
 
 .links{
@@ -236,7 +334,7 @@ body{
     position:fixed;
     inset:0;
 
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.65);
 
     display:none;
 
@@ -282,7 +380,6 @@ body{
 
 .form-group input,
 .form-group textarea{
-
     width:100%;
 
     background:rgba(255,255,255,0.07);
@@ -326,13 +423,8 @@ body{
     transition:0.3s;
 }
 
-.send-btn:hover{
-    transform:translateY(-2px);
-    filter:brightness(1.1);
-}
-
 .close-btn{
-    margin-top:15px;
+    margin-top:14px;
 
     width:100%;
 
@@ -365,13 +457,8 @@ body{
 
 @media(max-width:700px){
 
-    .topbar{
-        flex-direction:column;
-        gap:20px;
-    }
-
     .hero h1{
-        font-size:44px;
+        font-size:42px;
     }
 
     .hero-icon{
@@ -380,6 +467,10 @@ body{
 
     .search-input{
         font-size:18px;
+    }
+
+    .results{
+        grid-template-columns:1fr;
     }
 
 }
@@ -397,9 +488,17 @@ body{
             <div class="brand-name">StreamVault</div>
         </div>
 
-        <button class="support-btn" onclick="openModal()">
-            💬 תמיכה ובקשות
-        </button>
+        <div class="top-buttons">
+
+            <button class="top-btn" onclick="toggleFilters()">
+                🎭 סינון מתקדם
+            </button>
+
+            <button class="top-btn" onclick="openModal()">
+                💬 תמיכה ובקשות
+            </button>
+
+        </div>
 
     </div>
 
@@ -423,10 +522,20 @@ body{
             type="text"
             id="searchInput"
             class="search-input"
-            placeholder="חפש סרט, סדרה או אוסף סרטים..."
+            placeholder="חפש סרט, סדרה או אוסף..."
         >
 
         <div class="search-icon">🔍</div>
+
+    </div>
+
+    <div class="filters" id="filtersBox">
+
+        <div class="filter-title">
+            🎭 סינון לפי ז'אנר
+        </div>
+
+        <div class="genre-tags" id="genreTags"></div>
 
     </div>
 
@@ -443,7 +552,7 @@ body{
         </div>
 
         <div class="modal-desc">
-            מצאת בעיה באתר? רוצה לבקש סרט או סדרה חדשים?
+            אפשר לדווח על בעיות באתר או לבקש סרטים וסדרות חדשים
         </div>
 
         <form
@@ -474,7 +583,7 @@ body{
             <div class="form-group">
                 <textarea
                     name="message"
-                    placeholder="כתוב כאן את הבקשה או הבעיה..."
+                    placeholder="כתוב כאן..."
                     required
                 ></textarea>
             </div>
@@ -499,8 +608,10 @@ const SHEET_URL =
 "https://docs.google.com/spreadsheets/d/1cHeZpE0ibNRWC2onWo3Tx2wPieWjM75GJa49vpmtxX0/export?format=csv";
 
 let movies = [];
+let selectedGenre = null;
 
-const results = document.getElementById("results");
+const results =
+document.getElementById("results");
 
 function renderMovies(list){
 
@@ -522,6 +633,30 @@ function renderMovies(list){
             <div class="movie-title">
                 🎞️ ${movie.title}
             </div>
+
+            <div class="meta">
+
+                ${movie.year ? `
+                    <div class="badge">
+                        📅 ${movie.year}
+                    </div>
+                ` : ""}
+
+                ${movie.genres.map(genre => `
+                    <div class="badge">
+                        🎭 ${genre}
+                    </div>
+                `).join("")}
+
+            </div>
+
+            ${movie.description ? `
+
+                <div class="description">
+                    ${movie.description}
+                </div>
+
+            ` : ""}
 
             <div class="links">
 
@@ -549,15 +684,112 @@ function renderMovies(list){
 
 }
 
+function applyFilters(){
+
+    const search =
+    document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+    let filtered = movies.filter(movie => {
+
+        const matchesSearch =
+            movie.title.toLowerCase().includes(search);
+
+        const matchesGenre =
+            !selectedGenre ||
+            movie.genres.includes(selectedGenre);
+
+        return matchesSearch && matchesGenre;
+
+    });
+
+    renderMovies(filtered);
+
+}
+
+function createGenreTags(){
+
+    const genresSet = new Set();
+
+    movies.forEach(movie => {
+
+        movie.genres.forEach(genre => {
+
+            genresSet.add(genre);
+
+        });
+
+    });
+
+    const tagsContainer =
+    document.getElementById("genreTags");
+
+    tagsContainer.innerHTML = `
+
+        <div class="genre-tag active"
+             onclick="selectGenre(null,this)">
+             הכל
+        </div>
+
+        ${[...genresSet]
+        .sort()
+        .map(genre => `
+
+            <div
+                class="genre-tag"
+                onclick="selectGenre('${genre}',this)"
+            >
+                ${genre}
+            </div>
+
+        `).join("")}
+
+    `;
+
+}
+
+function selectGenre(genre,element){
+
+    selectedGenre = genre;
+
+    document
+    .querySelectorAll(".genre-tag")
+    .forEach(tag =>
+        tag.classList.remove("active")
+    );
+
+    element.classList.add("active");
+
+    applyFilters();
+
+}
+
 function parseMovies(data){
 
     movies = data
     .filter(row => row[0])
     .map(row => {
 
+        const title = row[0] || "";
+
+        const genres =
+        row[1]
+        ? row[1]
+            .split(",")
+            .map(g => g.trim())
+            .filter(Boolean)
+        : [];
+
+        const year = row[2] || "";
+
+        const description = row[3] || "";
+
         const links = [];
 
-        for(let i = 1; i < row.length; i += 2){
+        for(let i = 4; i < row.length; i += 2){
 
             if(row[i] && row[i+1]){
 
@@ -571,11 +803,16 @@ function parseMovies(data){
         }
 
         return{
-            title: row[0],
+            title,
+            genres,
+            year,
+            description,
             links
         };
 
     });
+
+    createGenreTags();
 
     renderMovies(movies);
 
@@ -611,21 +848,16 @@ Papa.parse(SHEET_URL,{
 
 document
 .getElementById("searchInput")
-.addEventListener("input",function(){
+.addEventListener("input",applyFilters);
 
-    const value = this.value
-    .trim()
-    .toLowerCase();
+function toggleFilters(){
 
-    const filtered = movies.filter(movie =>
-        movie.title
-        .toLowerCase()
-        .includes(value)
-    );
+    document
+    .getElementById("filtersBox")
+    .classList
+    .toggle("active");
 
-    renderMovies(filtered);
-
-});
+}
 
 function openModal(){
 
