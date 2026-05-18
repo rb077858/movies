@@ -1,147 +1,133 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MovieVault</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Movie Search</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Heebo',sans-serif;
 }
 
 body{
-    min-height:100vh;
+    font-family:'Heebo',sans-serif;
     background:
-    radial-gradient(circle at top right,#1e293b 0%,#020617 40%),
-    linear-gradient(135deg,#0f172a,#111827);
-    overflow-x:hidden;
+    radial-gradient(circle at top right,#1d4ed8 0%,transparent 30%),
+    radial-gradient(circle at bottom left,#7c3aed 0%,transparent 30%),
+    #020617;
+
+    min-height:100vh;
     color:white;
-}
-
-.bg-glow{
-    position:fixed;
-    width:500px;
-    height:500px;
-    border-radius:50%;
-    background:#2563eb55;
-    filter:blur(120px);
-    top:-150px;
-    right:-150px;
-    z-index:-1;
-}
-
-.bg-glow2{
-    position:fixed;
-    width:400px;
-    height:400px;
-    border-radius:50%;
-    background:#7c3aed55;
-    filter:blur(120px);
-    bottom:-120px;
-    left:-120px;
-    z-index:-1;
+    overflow-x:hidden;
 }
 
 .container{
     width:100%;
     max-width:1200px;
     margin:auto;
-    padding:40px 20px 80px;
+    padding:30px 20px 80px;
 }
 
 .hero{
     text-align:center;
-    margin-top:70px;
-    animation:fadeIn 1s ease;
+    padding-top:70px;
+    animation:fadeUp 1s ease;
 }
 
-.logo{
-    font-size:64px;
-    margin-bottom:12px;
+.hero-icon{
+    font-size:70px;
+    margin-bottom:10px;
 }
 
 .hero h1{
-    font-size:52px;
+    font-size:60px;
     font-weight:900;
+
     background:linear-gradient(to left,#60a5fa,#c084fc);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 .hero p{
-    color:#cbd5e1;
     margin-top:10px;
-    font-size:18px;
+    color:#cbd5e1;
+    font-size:20px;
 }
 
-.search-box{
+.search-wrapper{
+    max-width:750px;
     margin:50px auto;
-    max-width:700px;
     position:relative;
 }
 
-.search-box input{
+.search-input{
     width:100%;
-    padding:22px 70px 22px 28px;
-    border:none;
-    border-radius:25px;
-    background:rgba(255,255,255,0.08);
+    padding:22px 70px 22px 25px;
+
+    border-radius:28px;
+    border:2px solid rgba(255,255,255,0.08);
+
+    background:rgba(255,255,255,0.07);
     backdrop-filter:blur(14px);
+
     color:white;
     font-size:20px;
     outline:none;
+
     transition:0.3s;
-    border:2px solid transparent;
-    box-shadow:0 0 30px rgba(0,0,0,0.3);
 }
 
-.search-box input:focus{
+.search-input:focus{
     border-color:#60a5fa;
-    transform:scale(1.01);
+    box-shadow:0 0 30px rgba(96,165,250,0.25);
 }
 
-.search-box input::placeholder{
+.search-input::placeholder{
     color:#94a3b8;
 }
 
 .search-icon{
     position:absolute;
-    right:24px;
     top:50%;
+    right:24px;
     transform:translateY(-50%);
     font-size:28px;
 }
 
 .results{
-    margin-top:30px;
     display:grid;
     grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-    gap:25px;
+    gap:24px;
+    margin-top:20px;
 }
 
-.movie-card{
+.card{
     background:rgba(255,255,255,0.07);
     border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(16px);
+
     border-radius:28px;
-    padding:25px;
+    padding:24px;
+
+    backdrop-filter:blur(12px);
+
     transition:0.35s;
-    position:relative;
-    overflow:hidden;
-    animation:cardAppear .4s ease;
+    animation:fadeUp 0.5s ease;
 }
 
-.movie-card:hover{
+.card:hover{
     transform:translateY(-6px) scale(1.02);
     border-color:#60a5fa;
-    box-shadow:0 0 35px rgba(96,165,250,0.25);
+    box-shadow:0 0 35px rgba(96,165,250,0.2);
 }
 
 .movie-title{
@@ -157,65 +143,43 @@ body{
     gap:14px;
 }
 
-.movie-link{
+.link-btn{
     text-decoration:none;
-    color:white;
+
     background:linear-gradient(135deg,#2563eb,#7c3aed);
+
     padding:14px 18px;
-    border-radius:16px;
-    transition:0.25s;
-    font-weight:600;
+    border-radius:18px;
+
+    color:white;
+    font-weight:700;
+
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
+
+    transition:0.25s;
 }
 
-.movie-link:hover{
+.link-btn:hover{
     transform:translateX(-4px);
     filter:brightness(1.1);
 }
 
-.movie-link span{
-    font-size:18px;
-}
-
-.empty{
+.loading,
+.no-results{
     text-align:center;
-    color:#94a3b8;
-    margin-top:30px;
-    font-size:20px;
-}
-
-.footer{
-    margin-top:80px;
-    text-align:center;
-    color:#64748b;
-    font-size:14px;
-}
-
-.loading{
-    text-align:center;
-    padding:40px;
+    margin-top:40px;
     color:#cbd5e1;
-    font-size:20px;
+    font-size:22px;
 }
 
-@keyframes fadeIn{
+@keyframes fadeUp{
     from{
         opacity:0;
         transform:translateY(20px);
     }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
 
-@keyframes cardAppear{
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
     to{
         opacity:1;
         transform:translateY(0);
@@ -225,125 +189,71 @@ body{
 @media(max-width:700px){
 
     .hero h1{
-        font-size:38px;
+        font-size:42px;
     }
 
-    .logo{
-        font-size:48px;
+    .hero-icon{
+        font-size:54px;
     }
 
-    .search-box input{
+    .search-input{
         font-size:18px;
-        padding:18px 60px 18px 22px;
     }
 
-    .results{
-        grid-template-columns:1fr;
-    }
 }
+
 </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
-<div class="bg-glow2"></div>
-
 <div class="container">
 
     <div class="hero">
-        <div class="logo">🎬</div>
+        <div class="hero-icon">🎬</div>
+
         <h1>MovieVault</h1>
-        <p>חיפוש מהיר במאגר הסרטים שלך</p>
+
+        <p>
+            חיפוש מהיר במאגר הסרטים
+        </p>
     </div>
 
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="חפש סרט או סדרה..." />
+    <div class="search-wrapper">
+
+        <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="חפש סרט או סדרה..."
+        >
+
         <div class="search-icon">🔍</div>
+
     </div>
 
     <div id="results" class="results"></div>
 
-    <div class="footer">
-        נבנה עם GitHub Pages 🚀
-    </div>
-
 </div>
 
 <script>
-// ===============================
-// שים כאן את קישור ה־CSV של Google Sheets
-// ===============================
 
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1cHeZpE0ibNRWC2onWo3Tx2wPieWjM75GJa49vpmtxX0/edit?usp=drivesdk";
+// =============================
+// קישור CSV אמיתי
+// =============================
+
+const SHEET_URL =
+"https://docs.google.com/spreadsheets/d/1cHeZpE0ibNRWC2onWo3Tx2wPieWjM75GJa49vpmtxX0/export?format=csv";
 
 let movies = [];
 
-async function loadMovies() {
+const results = document.getElementById("results");
 
-    const results = document.getElementById("results");
+function renderMovies(list){
 
-    results.innerHTML = `
-        <div class="loading">
-            טוען סרטים...
-        </div>
-    `;
-
-    try{
-
-        const response = await fetch(SHEET_CSV_URL);
-        const csvText = await response.text();
-
-        const rows = csvText.split("\n").slice(1);
-
-        movies = rows
-        .map(row => row.split(","))
-        .filter(row => row[0])
-        .map(row => {
-
-            return {
-                title: row[0]?.replace(/"/g,'').trim(),
-
-                links: [
-                    {
-                        name: row[1]?.replace(/"/g,'').trim(),
-                        url: row[2]?.replace(/"/g,'').trim()
-                    },
-                    {
-                        name: row[3]?.replace(/"/g,'').trim(),
-                        url: row[4]?.replace(/"/g,'').trim()
-                    },
-                    {
-                        name: row[5]?.replace(/"/g,'').trim(),
-                        url: row[6]?.replace(/"/g,'').trim()
-                    }
-                ].filter(link => link.name && link.url)
-
-            };
-
-        });
-
-        renderMovies(movies);
-
-    }catch(err){
+    if(list.length === 0){
 
         results.innerHTML = `
-            <div class="empty">
-                ❌ שגיאה בטעינת הגיליון
-            </div>
-        `;
-
-        console.error(err);
-    }
-}
-
-function renderMovies(movieList){
-
-    const results = document.getElementById("results");
-
-    if(movieList.length === 0){
-
-        results.innerHTML = `
-            <div class="empty">
+            <div class="no-results">
                 😢 לא נמצאו סרטים
             </div>
         `;
@@ -351,9 +261,9 @@ function renderMovies(movieList){
         return;
     }
 
-    results.innerHTML = movieList.map(movie => `
+    results.innerHTML = list.map(movie => `
 
-        <div class="movie-card">
+        <div class="card">
 
             <div class="movie-title">
                 🎞️ ${movie.title}
@@ -363,9 +273,11 @@ function renderMovies(movieList){
 
                 ${movie.links.map(link => `
 
-                    <a class="movie-link"
-                       href="${link.url}"
-                       target="_blank">
+                    <a
+                        href="${link.url}"
+                        target="_blank"
+                        class="link-btn"
+                    >
 
                         <span>${link.name}</span>
 
@@ -380,21 +292,87 @@ function renderMovies(movieList){
         </div>
 
     `).join("");
+
 }
 
-document.getElementById("searchInput")
-.addEventListener("input", e => {
+function parseMovies(data){
 
-    const value = e.target.value.trim().toLowerCase();
+    movies = data
+    .filter(row => row[0])
+    .map(row => {
+
+        const links = [];
+
+        for(let i = 1; i < row.length; i += 2){
+
+            if(row[i] && row[i+1]){
+
+                links.push({
+                    name: row[i],
+                    url: row[i+1]
+                });
+
+            }
+
+        }
+
+        return{
+            title: row[0],
+            links
+        };
+
+    });
+
+    renderMovies(movies);
+
+}
+
+results.innerHTML = `
+    <div class="loading">
+        טוען סרטים...
+    </div>
+`;
+
+Papa.parse(SHEET_URL,{
+
+    download:true,
+
+    complete:function(res){
+
+        parseMovies(res.data);
+
+    },
+
+    error:function(){
+
+        results.innerHTML = `
+            <div class="no-results">
+                ❌ שגיאה בטעינת הגיליון
+            </div>
+        `;
+
+    }
+
+});
+
+document
+.getElementById("searchInput")
+.addEventListener("input",function(){
+
+    const value = this.value
+    .trim()
+    .toLowerCase();
 
     const filtered = movies.filter(movie =>
-        movie.title.toLowerCase().includes(value)
+        movie.title
+        .toLowerCase()
+        .includes(value)
     );
 
     renderMovies(filtered);
+
 });
 
-loadMovies();
 </script>
 
 </body>
