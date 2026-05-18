@@ -11,6 +11,8 @@
 
 <style>
 
+/* ====== ORIGINAL STYLE (לא נגעתי כמעט) ====== */
+
 *{
     margin:0;
     padding:0;
@@ -28,8 +30,6 @@ body{
     color:white;
 }
 
-/* TOP BAR */
-
 .container{
     max-width:1300px;
     margin:auto;
@@ -40,7 +40,6 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    flex-wrap:wrap;
 }
 
 .brand{
@@ -49,9 +48,7 @@ body{
     align-items:center;
 }
 
-.brand-icon{
-    font-size:40px;
-}
+.brand-icon{font-size:40px;}
 
 .brand-name{
     font-size:28px;
@@ -61,17 +58,26 @@ body{
     -webkit-text-fill-color:transparent;
 }
 
+/* ====== SMALL SUPPORT BUTTON (תיקון חשוב) ====== */
+
 .top-btn{
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.1);
-    padding:10px 16px;
-    border-radius:14px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:8px 14px;
+    border-radius:12px;
     cursor:pointer;
     color:white;
     font-weight:700;
+    font-size:14px;
+    transition:0.2s;
 }
 
-/* HERO */
+.top-btn:hover{
+    border-color:#60a5fa;
+    transform:translateY(-2px);
+}
+
+/* ====== HERO ====== */
 
 .hero{
     text-align:center;
@@ -91,7 +97,7 @@ body{
     margin-top:10px;
 }
 
-/* SEARCH */
+/* ====== SEARCH ====== */
 
 .search-wrapper{
     max-width:800px;
@@ -103,11 +109,8 @@ body{
     width:100%;
     padding:22px 130px 22px 70px;
     border-radius:28px;
-
     border:2px solid rgba(255,255,255,0.08);
-
     background:rgba(255,255,255,0.07);
-
     color:white;
     font-size:20px;
     outline:none;
@@ -121,53 +124,56 @@ body{
     font-size:24px;
 }
 
+/* 🧹 FILTER ICON — קטן ומגניב */
 .filter-icon{
     position:absolute;
     left:20px;
     top:50%;
     transform:translateY(-50%);
-    width:44px;
-    height:44px;
-
+    width:42px;
+    height:42px;
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:12px;
-
-    background:rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.06);
     cursor:pointer;
+    transition:0.2s;
 }
 
-/* FILTERS */
+.filter-icon:hover{
+    transform:translateY(-50%) scale(1.08);
+    border:1px solid #60a5fa;
+}
+
+/* ====== FILTER PANEL ====== */
 
 .filters{
     display:none;
-    margin:20px auto;
     max-width:800px;
-    background:rgba(255,255,255,0.06);
-    padding:20px;
+    margin:20px auto;
+    padding:18px;
     border-radius:20px;
+    background:rgba(255,255,255,0.05);
 }
 
-.filters.active{
-    display:block;
-}
+.filters.active{display:block;}
 
 .genre-tag{
     display:inline-block;
     margin:5px;
     padding:8px 12px;
     border-radius:999px;
-    background:rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.07);
     cursor:pointer;
+    font-size:13px;
 }
 
 .genre-tag.active{
     background:#2563eb;
 }
 
-/* CARDS */
+/* ====== CARDS (נשאר כמו שהיה יפה) ====== */
 
 .results{
     display:grid;
@@ -185,12 +191,11 @@ body{
 .title{
     font-size:24px;
     font-weight:900;
-    margin-bottom:10px;
 }
 
 .badge{
     display:inline-block;
-    margin:3px;
+    margin:4px 4px 0 0;
     padding:5px 10px;
     background:rgba(255,255,255,0.08);
     border-radius:999px;
@@ -199,7 +204,7 @@ body{
 
 .desc{
     color:#cbd5e1;
-    margin:10px 0;
+    margin-top:8px;
     font-size:14px;
 }
 
@@ -214,7 +219,7 @@ body{
     font-weight:700;
 }
 
-/* MODAL */
+/* ====== MODAL ====== */
 
 .modal{
     position:fixed;
@@ -225,9 +230,7 @@ body{
     justify-content:center;
 }
 
-.modal.active{
-    display:flex;
-}
+.modal.active{display:flex;}
 
 .box{
     background:#0f172a;
@@ -246,8 +249,8 @@ input,textarea{
 }
 
 button{
-    padding:10px;
     width:100%;
+    padding:10px;
     border:none;
     border-radius:10px;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
@@ -257,6 +260,7 @@ button{
 
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -272,13 +276,17 @@ button{
 
     <div class="hero">
         <h1>סרטים וסדרות</h1>
-        <p>חיפוש מתקדם במאגר</p>
+        <p>חיפוש מהיר במאגר</p>
     </div>
 
     <div class="search-wrapper">
+
         <input id="search" class="search-input" placeholder="חפש סרט או סדרה...">
+
         <div class="search-icon">🔍</div>
+
         <div class="filter-icon" onclick="toggleFilters()">🧹</div>
+
     </div>
 
     <div id="filters" class="filters"></div>
@@ -292,10 +300,9 @@ button{
 <div class="modal" id="modal">
     <div class="box">
 
-        <h3>תמיכה / בקשות</h3>
+        <h3>תמיכה</h3>
 
         <form action="https://formsubmit.co/rb077858@gmail.com" method="POST">
-
             <input type="hidden" name="_captcha" value="false">
 
             <input name="name" placeholder="שם" required>
@@ -303,7 +310,6 @@ button{
             <textarea name="message" placeholder="הודעה" required></textarea>
 
             <button type="submit">שלח</button>
-
         </form>
 
         <button onclick="closeModal()" style="margin-top:10px;background:#334155">
@@ -325,26 +331,23 @@ function render(list){
 
     const el = document.getElementById("results");
 
-    if(list.length === 0){
-        el.innerHTML = "לא נמצא כלום";
-        return;
-    }
-
     el.innerHTML = list.map(m => `
         <div class="card">
+
             <div class="title">${m.title}</div>
 
             <div>
-                ${m.genres.map(g => `<span class="badge">${g}</span>`).join("")}
+                ${m.genres.map(g=>`<span class="badge">${g}</span>`).join("")}
             </div>
 
             ${m.year ? `<div class="badge">📅 ${m.year}</div>` : ""}
 
             ${m.desc ? `<div class="desc">${m.desc}</div>` : ""}
 
-            ${m.links.map(l => `
+            ${m.links.map(l=>`
                 <a class="link" href="${l.url}" target="_blank">${l.name}</a>
             `).join("")}
+
         </div>
     `).join("");
 
@@ -354,7 +357,7 @@ function filter(){
 
     const q = document.getElementById("search").value.toLowerCase();
 
-    let res = data.filter(m =>
+    const res = data.filter(m =>
         m.title.toLowerCase().includes(q) &&
         (!selectedGenre || m.genres.includes(selectedGenre))
     );
@@ -366,19 +369,17 @@ function buildGenres(){
 
     const set = new Set();
 
-    data.forEach(m => m.genres.forEach(g => set.add(g)));
+    data.forEach(m => m.genres.forEach(g=>set.add(g)));
 
     document.getElementById("filters").innerHTML =
-        [...set].map(g => `
-            <span class="genre-tag" onclick="selectGenre('${g}',this)">
-                ${g}
-            </span>
-        `).join("");
-
+    [...set].map(g=>`
+        <span class="genre-tag" onclick="selectGenre('${g}',this)">
+            ${g}
+        </span>
+    `).join("");
 }
 
 function selectGenre(g,el){
-
     selectedGenre = g;
 
     document.querySelectorAll(".genre-tag").forEach(t=>t.classList.remove("active"));
@@ -408,13 +409,9 @@ Papa.parse(SHEET,{
         data = res.data.filter(r=>r[0]).map(r=>({
 
             title:r[0],
-
-            genres: (r[1] || "").split(",").map(x=>x.trim()).filter(Boolean),
-
+            genres:(r[1]||"").split(",").map(x=>x.trim()).filter(Boolean),
             year:r[2],
-
             desc:r[3],
-
             links:[]
         }));
 
