@@ -6,9 +6,7 @@
 
 <title>StreamVault</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
 <style>
@@ -17,11 +15,10 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:'Heebo',sans-serif;
 }
 
 body{
-    font-family:'Heebo',sans-serif;
-
     background:
     radial-gradient(circle at top right,#2563eb 0%,transparent 30%),
     radial-gradient(circle at bottom left,#7c3aed 0%,transparent 30%),
@@ -29,29 +26,27 @@ body{
 
     min-height:100vh;
     color:white;
-    overflow-x:hidden;
 }
 
+/* TOP BAR */
+
 .container{
-    width:100%;
     max-width:1300px;
     margin:auto;
-    padding:25px 20px 80px;
+    padding:25px 20px;
 }
 
 .topbar{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:30px;
-    gap:20px;
     flex-wrap:wrap;
 }
 
 .brand{
     display:flex;
+    gap:10px;
     align-items:center;
-    gap:12px;
 }
 
 .brand-icon{
@@ -59,420 +54,205 @@ body{
 }
 
 .brand-name{
-    font-size:30px;
+    font-size:28px;
     font-weight:900;
-
     background:linear-gradient(to left,#60a5fa,#c084fc);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-.top-buttons{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
 .top-btn{
     background:rgba(255,255,255,0.08);
     border:1px solid rgba(255,255,255,0.1);
-
-    color:white;
-
-    padding:12px 20px;
-
-    border-radius:16px;
-
+    padding:10px 16px;
+    border-radius:14px;
     cursor:pointer;
-
-    transition:0.3s;
-
-    font-size:15px;
+    color:white;
     font-weight:700;
 }
 
-.top-btn:hover{
-    transform:translateY(-2px);
-    border-color:#60a5fa;
-    box-shadow:0 0 20px rgba(96,165,250,0.2);
-}
+/* HERO */
 
 .hero{
     text-align:center;
-    padding-top:30px;
-    animation:fadeUp 1s ease;
-}
-
-.hero-icon{
-    font-size:72px;
-    margin-bottom:12px;
+    margin-top:30px;
 }
 
 .hero h1{
-    font-size:64px;
+    font-size:54px;
     font-weight:900;
-
     background:linear-gradient(to left,#60a5fa,#c084fc);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 .hero p{
-    margin-top:10px;
     color:#cbd5e1;
-    font-size:20px;
+    margin-top:10px;
 }
+
+/* SEARCH */
 
 .search-wrapper{
     max-width:800px;
-    margin:55px auto 30px;
+    margin:40px auto;
     position:relative;
 }
 
 .search-input{
     width:100%;
-    padding:22px 70px 22px 25px;
-
-    border-radius:30px;
+    padding:22px 130px 22px 70px;
+    border-radius:28px;
 
     border:2px solid rgba(255,255,255,0.08);
 
     background:rgba(255,255,255,0.07);
 
-    backdrop-filter:blur(15px);
-
     color:white;
-
     font-size:20px;
-
     outline:none;
-
-    transition:0.3s;
-}
-
-.search-input:focus{
-    border-color:#60a5fa;
-    box-shadow:0 0 30px rgba(96,165,250,0.25);
-}
-
-.search-input::placeholder{
-    color:#94a3b8;
 }
 
 .search-icon{
     position:absolute;
-    right:24px;
+    right:20px;
     top:50%;
     transform:translateY(-50%);
-    font-size:28px;
+    font-size:24px;
 }
+
+.filter-icon{
+    position:absolute;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    width:44px;
+    height:44px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.08);
+    cursor:pointer;
+}
+
+/* FILTERS */
 
 .filters{
     display:none;
-
+    margin:20px auto;
+    max-width:800px;
     background:rgba(255,255,255,0.06);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:26px;
-
-    padding:24px;
-
-    margin-bottom:35px;
-
-    backdrop-filter:blur(15px);
-
-    animation:fadeUp 0.3s ease;
+    padding:20px;
+    border-radius:20px;
 }
 
 .filters.active{
     display:block;
 }
 
-.filter-title{
-    font-size:24px;
-    font-weight:800;
-    margin-bottom:18px;
-}
-
-.genre-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-}
-
 .genre-tag{
-    padding:10px 16px;
-
+    display:inline-block;
+    margin:5px;
+    padding:8px 12px;
     border-radius:999px;
-
     background:rgba(255,255,255,0.08);
-
-    border:1px solid rgba(255,255,255,0.08);
-
     cursor:pointer;
-
-    transition:0.25s;
-
-    font-size:14px;
-    font-weight:700;
-}
-
-.genre-tag:hover{
-    transform:translateY(-2px);
 }
 
 .genre-tag.active{
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-    border-color:transparent;
+    background:#2563eb;
 }
+
+/* CARDS */
 
 .results{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(350px,1fr));
-    gap:24px;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:20px;
+    margin-top:20px;
 }
 
 .card{
     background:rgba(255,255,255,0.07);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:30px;
-
-    padding:24px;
-
-    backdrop-filter:blur(14px);
-
-    transition:0.35s;
-
-    animation:fadeUp 0.5s ease;
+    border-radius:20px;
+    padding:20px;
 }
 
-.card:hover{
-    transform:translateY(-7px) scale(1.02);
-
-    border-color:#60a5fa;
-
-    box-shadow:0 0 35px rgba(96,165,250,0.25);
-}
-
-.movie-title{
-    font-size:30px;
+.title{
+    font-size:24px;
     font-weight:900;
-    margin-bottom:12px;
-    line-height:1.3;
-}
-
-.meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:16px;
+    margin-bottom:10px;
 }
 
 .badge{
+    display:inline-block;
+    margin:3px;
+    padding:5px 10px;
     background:rgba(255,255,255,0.08);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    padding:8px 14px;
-
     border-radius:999px;
-
-    font-size:13px;
-    color:#e2e8f0;
+    font-size:12px;
 }
 
-.description{
+.desc{
     color:#cbd5e1;
-    line-height:1.7;
-    margin-bottom:20px;
-    font-size:15px;
+    margin:10px 0;
+    font-size:14px;
 }
 
-.links{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-}
-
-.link-btn{
-    text-decoration:none;
-
+.link{
+    display:block;
+    margin-top:8px;
+    padding:10px;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
-
+    border-radius:12px;
+    text-decoration:none;
     color:white;
-
-    padding:14px 18px;
-
-    border-radius:18px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
     font-weight:700;
-
-    transition:0.25s;
 }
 
-.link-btn:hover{
-    transform:translateX(-4px);
-    filter:brightness(1.1);
-}
-
-.loading,
-.no-results{
-    text-align:center;
-    margin-top:40px;
-    color:#cbd5e1;
-    font-size:22px;
-}
+/* MODAL */
 
 .modal{
     position:fixed;
     inset:0;
-
-    background:rgba(0,0,0,0.65);
-
+    background:rgba(0,0,0,0.7);
     display:none;
-
-    justify-content:center;
     align-items:center;
-
-    z-index:999;
+    justify-content:center;
 }
 
 .modal.active{
     display:flex;
 }
 
-.modal-box{
-    width:92%;
-    max-width:500px;
-
+.box{
     background:#0f172a;
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:28px;
-
-    padding:28px;
-
-    animation:fadeUp 0.3s ease;
+    padding:20px;
+    border-radius:20px;
+    width:90%;
+    max-width:450px;
 }
 
-.modal-title{
-    font-size:30px;
-    font-weight:900;
-    margin-bottom:10px;
-}
-
-.modal-desc{
-    color:#cbd5e1;
-    margin-bottom:25px;
-}
-
-.form-group{
-    margin-bottom:18px;
-}
-
-.form-group input,
-.form-group textarea{
+input,textarea{
     width:100%;
-
-    background:rgba(255,255,255,0.07);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:16px;
-
-    padding:15px;
-
-    color:white;
-
-    font-size:16px;
-
-    outline:none;
-}
-
-.form-group textarea{
-    min-height:140px;
-    resize:vertical;
-}
-
-.send-btn{
-    width:100%;
-
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-
+    margin:8px 0;
+    padding:10px;
+    border-radius:10px;
     border:none;
-
-    color:white;
-
-    padding:16px;
-
-    border-radius:18px;
-
-    font-size:18px;
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:0.3s;
 }
 
-.close-btn{
-    margin-top:14px;
-
+button{
+    padding:10px;
     width:100%;
-
-    background:transparent;
-
-    border:1px solid rgba(255,255,255,0.1);
-
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
     color:white;
-
-    padding:14px;
-
-    border-radius:16px;
-
-    cursor:pointer;
-}
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-@media(max-width:700px){
-
-    .hero h1{
-        font-size:42px;
-    }
-
-    .hero-icon{
-        font-size:54px;
-    }
-
-    .search-input{
-        font-size:18px;
-    }
-
-    .results{
-        grid-template-columns:1fr;
-    }
-
+    font-weight:800;
 }
 
 </style>
@@ -482,412 +262,176 @@ body{
 <div class="container">
 
     <div class="topbar">
-
         <div class="brand">
             <div class="brand-icon">🎬</div>
             <div class="brand-name">StreamVault</div>
         </div>
 
-        <div class="top-buttons">
-
-            <button class="top-btn" onclick="toggleFilters()">
-                🎭 סינון מתקדם
-            </button>
-
-            <button class="top-btn" onclick="openModal()">
-                💬 תמיכה ובקשות
-            </button>
-
-        </div>
-
+        <button class="top-btn" onclick="openModal()">💬 תמיכה</button>
     </div>
 
     <div class="hero">
-
-        <div class="hero-icon">🍿</div>
-
-        <h1>
-            סרטים וסדרות ללא הגבלה
-        </h1>
-
-        <p>
-            חיפוש מהיר במאגר הסרטים והסדרות
-        </p>
-
+        <h1>סרטים וסדרות</h1>
+        <p>חיפוש מתקדם במאגר</p>
     </div>
 
     <div class="search-wrapper">
-
-        <input
-            type="text"
-            id="searchInput"
-            class="search-input"
-            placeholder="חפש סרט, סדרה או אוסף..."
-        >
-
+        <input id="search" class="search-input" placeholder="חפש סרט או סדרה...">
         <div class="search-icon">🔍</div>
-
+        <div class="filter-icon" onclick="toggleFilters()">🧹</div>
     </div>
 
-    <div class="filters" id="filtersBox">
-
-        <div class="filter-title">
-            🎭 סינון לפי ז'אנר
-        </div>
-
-        <div class="genre-tags" id="genreTags"></div>
-
-    </div>
+    <div id="filters" class="filters"></div>
 
     <div id="results" class="results"></div>
 
 </div>
 
-<div class="modal" id="supportModal">
+<!-- MODAL -->
 
-    <div class="modal-box">
+<div class="modal" id="modal">
+    <div class="box">
 
-        <div class="modal-title">
-            💬 תמיכה ובקשות
-        </div>
+        <h3>תמיכה / בקשות</h3>
 
-        <div class="modal-desc">
-            אפשר לדווח על בעיות באתר או לבקש סרטים וסדרות חדשים
-        </div>
-
-        <form
-            action="https://formsubmit.co/rb077858@gmail.com"
-            method="POST"
-        >
+        <form action="https://formsubmit.co/rb077858@gmail.com" method="POST">
 
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
 
-            <div class="form-group">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="השם שלך"
-                    required
-                >
-            </div>
+            <input name="name" placeholder="שם" required>
+            <input name="email" placeholder="אימייל">
+            <textarea name="message" placeholder="הודעה" required></textarea>
 
-            <div class="form-group">
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="אימייל לחזרה"
-                >
-            </div>
-
-            <div class="form-group">
-                <textarea
-                    name="message"
-                    placeholder="כתוב כאן..."
-                    required
-                ></textarea>
-            </div>
-
-            <button class="send-btn" type="submit">
-                🚀 שלח
-            </button>
+            <button type="submit">שלח</button>
 
         </form>
 
-        <button class="close-btn" onclick="closeModal()">
+        <button onclick="closeModal()" style="margin-top:10px;background:#334155">
             סגור
         </button>
 
     </div>
-
 </div>
 
 <script>
 
-const SHEET_URL =
+const SHEET =
 "https://docs.google.com/spreadsheets/d/1cHeZpE0ibNRWC2onWo3Tx2wPieWjM75GJa49vpmtxX0/export?format=csv";
 
-let movies = [];
+let data = [];
 let selectedGenre = null;
 
-const results =
-document.getElementById("results");
+function render(list){
 
-function renderMovies(list){
+    const el = document.getElementById("results");
 
     if(list.length === 0){
-
-        results.innerHTML = `
-            <div class="no-results">
-                😢 לא נמצאו תוצאות
-            </div>
-        `;
-
+        el.innerHTML = "לא נמצא כלום";
         return;
     }
 
-    results.innerHTML = list.map(movie => `
-
+    el.innerHTML = list.map(m => `
         <div class="card">
+            <div class="title">${m.title}</div>
 
-            <div class="movie-title">
-                🎞️ ${movie.title}
+            <div>
+                ${m.genres.map(g => `<span class="badge">${g}</span>`).join("")}
             </div>
 
-            <div class="meta">
+            ${m.year ? `<div class="badge">📅 ${m.year}</div>` : ""}
 
-                ${movie.year ? `
-                    <div class="badge">
-                        📅 ${movie.year}
-                    </div>
-                ` : ""}
+            ${m.desc ? `<div class="desc">${m.desc}</div>` : ""}
 
-                ${movie.genres.map(genre => `
-                    <div class="badge">
-                        🎭 ${genre}
-                    </div>
-                `).join("")}
-
-            </div>
-
-            ${movie.description ? `
-
-                <div class="description">
-                    ${movie.description}
-                </div>
-
-            ` : ""}
-
-            <div class="links">
-
-                ${movie.links.map(link => `
-
-                    <a
-                        href="${link.url}"
-                        target="_blank"
-                        class="link-btn"
-                    >
-
-                        <span>${link.name}</span>
-
-                        <span>▶</span>
-
-                    </a>
-
-                `).join("")}
-
-            </div>
-
+            ${m.links.map(l => `
+                <a class="link" href="${l.url}" target="_blank">${l.name}</a>
+            `).join("")}
         </div>
-
     `).join("");
 
 }
 
-function applyFilters(){
+function filter(){
 
-    const search =
-    document
-    .getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
+    const q = document.getElementById("search").value.toLowerCase();
 
-    let filtered = movies.filter(movie => {
-
-        const matchesSearch =
-            movie.title.toLowerCase().includes(search);
-
-        const matchesGenre =
-            !selectedGenre ||
-            movie.genres.includes(selectedGenre);
-
-        return matchesSearch && matchesGenre;
-
-    });
-
-    renderMovies(filtered);
-
-}
-
-function createGenreTags(){
-
-    const genresSet = new Set();
-
-    movies.forEach(movie => {
-
-        movie.genres.forEach(genre => {
-
-            genresSet.add(genre);
-
-        });
-
-    });
-
-    const tagsContainer =
-    document.getElementById("genreTags");
-
-    tagsContainer.innerHTML = `
-
-        <div class="genre-tag active"
-             onclick="selectGenre(null,this)">
-             הכל
-        </div>
-
-        ${[...genresSet]
-        .sort()
-        .map(genre => `
-
-            <div
-                class="genre-tag"
-                onclick="selectGenre('${genre}',this)"
-            >
-                ${genre}
-            </div>
-
-        `).join("")}
-
-    `;
-
-}
-
-function selectGenre(genre,element){
-
-    selectedGenre = genre;
-
-    document
-    .querySelectorAll(".genre-tag")
-    .forEach(tag =>
-        tag.classList.remove("active")
+    let res = data.filter(m =>
+        m.title.toLowerCase().includes(q) &&
+        (!selectedGenre || m.genres.includes(selectedGenre))
     );
 
-    element.classList.add("active");
+    render(res);
+}
 
-    applyFilters();
+function buildGenres(){
+
+    const set = new Set();
+
+    data.forEach(m => m.genres.forEach(g => set.add(g)));
+
+    document.getElementById("filters").innerHTML =
+        [...set].map(g => `
+            <span class="genre-tag" onclick="selectGenre('${g}',this)">
+                ${g}
+            </span>
+        `).join("");
 
 }
 
-function parseMovies(data){
+function selectGenre(g,el){
 
-    movies = data
-    .filter(row => row[0])
-    .map(row => {
+    selectedGenre = g;
 
-        const title = row[0] || "";
+    document.querySelectorAll(".genre-tag").forEach(t=>t.classList.remove("active"));
+    el.classList.add("active");
 
-        const genres =
-        row[1]
-        ? row[1]
-            .split(",")
-            .map(g => g.trim())
-            .filter(Boolean)
-        : [];
-
-        const year = row[2] || "";
-
-        const description = row[3] || "";
-
-        const links = [];
-
-        for(let i = 4; i < row.length; i += 2){
-
-            if(row[i] && row[i+1]){
-
-                links.push({
-                    name: row[i],
-                    url: row[i+1]
-                });
-
-            }
-
-        }
-
-        return{
-            title,
-            genres,
-            year,
-            description,
-            links
-        };
-
-    });
-
-    createGenreTags();
-
-    renderMovies(movies);
-
+    filter();
 }
-
-results.innerHTML = `
-    <div class="loading">
-        ⏳ טוען מאגר...
-    </div>
-`;
-
-Papa.parse(SHEET_URL,{
-
-    download:true,
-
-    complete:function(res){
-
-        parseMovies(res.data);
-
-    },
-
-    error:function(){
-
-        results.innerHTML = `
-            <div class="no-results">
-                ❌ שגיאה בטעינת המאגר
-            </div>
-        `;
-
-    }
-
-});
-
-document
-.getElementById("searchInput")
-.addEventListener("input",applyFilters);
 
 function toggleFilters(){
-
-    document
-    .getElementById("filtersBox")
-    .classList
-    .toggle("active");
-
+    document.getElementById("filters").classList.toggle("active");
 }
 
 function openModal(){
-
-    document
-    .getElementById("supportModal")
-    .classList
-    .add("active");
-
+    document.getElementById("modal").classList.add("active");
 }
 
 function closeModal(){
-
-    document
-    .getElementById("supportModal")
-    .classList
-    .remove("active");
-
+    document.getElementById("modal").classList.remove("active");
 }
 
-window.addEventListener("click",function(e){
+document.getElementById("search").addEventListener("input",filter);
 
-    const modal =
-    document.getElementById("supportModal");
+Papa.parse(SHEET,{
+    download:true,
+    complete:(res)=>{
 
-    if(e.target === modal){
+        data = res.data.filter(r=>r[0]).map(r=>({
 
-        closeModal();
+            title:r[0],
 
+            genres: (r[1] || "").split(",").map(x=>x.trim()).filter(Boolean),
+
+            year:r[2],
+
+            desc:r[3],
+
+            links:[]
+        }));
+
+        for(let i=4;i<res.data[0].length;i+=2){
+            data.forEach((m,idx)=>{
+                if(res.data[idx] && res.data[idx][i]){
+                    m.links.push({
+                        name:res.data[idx][i],
+                        url:res.data[idx][i+1]
+                    });
+                }
+            });
+        }
+
+        buildGenres();
+        render(data);
     }
-
 });
 
 </script>
