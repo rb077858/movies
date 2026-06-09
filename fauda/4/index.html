@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>פאודה עונה 4 - צפייה ישירה</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Heebo',sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top right,#b91c1c 0%,transparent 30%),
+    radial-gradient(circle at bottom left,#451a03 0%,transparent 30%),
+    #0a0a0a;
+
+    min-height:100vh;
+    color:white;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:25px 20px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.brand{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.brand-icon{font-size:32px;}
+
+.brand-name{
+    font-size:24px;
+    font-weight:900;
+    background:linear-gradient(to left,#ef4444,#f59e0b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.top-btn{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:8px 14px;
+    border-radius:12px;
+    cursor:pointer;
+    color:white;
+    font-weight:700;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.top-btn:hover{
+    border-color:#ef4444;
+    transform:translateY(-2px);
+}
+
+/* ====== HERO ====== */
+
+.hero{
+    text-align:center;
+    margin-top:20px;
+}
+
+.hero h1{
+    font-size:42px;
+    font-weight:900;
+    background:linear-gradient(to left,#ef4444,#f59e0b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    color:#cbd5e1;
+    margin-top:10px;
+    font-size:16px;
+}
+
+/* ====== SEARCH ====== */
+
+.search-wrapper{
+    margin:30px auto;
+    position:relative;
+}
+
+.search-input{
+    width:100%;
+    padding:16px 50px 16px 20px;
+    border-radius:24px;
+    border:2px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.07);
+    color:white;
+    font-size:18px;
+    outline:none;
+    text-align:right;
+}
+
+.search-icon{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:18px;
+    color:#a3a3a3;
+}
+
+/* ====== RESULTS ====== */
+
+.results{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-top:20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.05);
+    border-radius:16px;
+    padding:16px 20px;
+    display:flex;
+    justify-content:between;
+    align-items:center;
+    gap:15px;
+}
+
+.title{
+    font-size:18px;
+    font-weight:700;
+    flex-grow:1;
+}
+
+.link{
+    padding:10px 20px;
+    background:linear-gradient(135deg,#b91c1c,#7f1d1d);
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    font-weight:700;
+    font-size:14px;
+    white-space:nowrap;
+    transition:0.2s;
+}
+
+.link:hover{
+    opacity:0.9;
+    transform:translateY(-1px);
+}
+
+/* ====== MODAL ====== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding:20px;
+}
+
+.modal.active{display:flex;}
+
+.box{
+    background:#171717;
+    border:1px solid rgba(255,255,255,0.1);
+    padding:25px;
+    border-radius:20px;
+    width:100%;
+    max-width:450px;
+}
+
+.box h3{
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+input,textarea{
+    width:100%;
+    margin:8px 0;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.1);
+    background:#262626;
+    color:white;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus,textarea:focus{
+    border-color:#ef4444;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#b91c1c,#7f1d1d);
+    color:white;
+    font-weight:800;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+
+@media(max-width:600px){
+    .hero h1{
+        font-size:32px;
+    }
+    .card {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .link {
+        display: block;
+        text-align: center;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-icon">🦅</div>
+            <div class="brand-name">פאודה 5</div>
+        </div>
+
+        <button class="top-btn" onclick="openModal()">💬 דיווח / תמיכה</button>
+    </div>
+
+    <div class="hero">
+        <h1>פאודה עונה 4</h1>
+        <p>פרקים מלאים לצפייה ישירה ב-Google Drive</p>
+    </div>
+
+    <div class="search-wrapper">
+        <input id="search" class="search-input" placeholder="חפש מספר פרק או שם...">
+        <div class="search-icon">🔍</div>
+    </div>
+
+    <div id="results" class="results"></div>
+
+</div>
+
+<div class="modal" id="modal">
+    <div class="box">
+
+        <h3>צור קשר עם התמיכה</h3>
+
+        <form action="https://formsubmit.co/rb077858@gmail.com" method="POST">
+            <input name="name" placeholder="שם מלא" required>
+            <textarea name="message" rows="4" placeholder="איזה פרק לא עובד?" required></textarea>
+            <input type="hidden" name="_next" value="https://r.is-cool.dev/movies/fauda">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_subject" value="פנייה חדשה באתר פאודה עונה 4">
+
+            <button type="submit">שלח פנייה</button>
+        </form>
+
+        <button onclick="closeModal()" style="margin-top:10px;background:#404040">
+            סגור חלון
+        </button>
+
+    </div>
+</div>
+
+<script>
+
+const SHEET = "https://https://docs.google.com/spreadsheets/d/1j8rar32uDjKtnFTGrSS6dejMdd0Op-232LuTSdUUz0g/export?format=csv";
+
+let data = [];
+
+function render(list){
+    const el = document.getElementById("results");
+
+    if(list.length === 0) {
+        el.innerHTML = '<div style="text-align:center; color:#a3a3a3; padding:40px;">לא נמצאו פרקים מתאימים.</div>';
+        return;
+    }
+
+    el.innerHTML = list.map(m => `
+        <div class="card">
+            <div class="title">${m.title}</div>
+            <a class="link" href="${m.url}" target="_blank">🎬 צפייה בפרק</a>
+        </div>
+    `).join("");
+}
+
+function filter(){
+    const q = document.getElementById("search").value.trim().toLowerCase();
+    const res = data.filter(m => m.title.toLowerCase().includes(q));
+    render(res);
+}
+
+document.getElementById("search").addEventListener("input",filter);
+
+Papa.parse(SHEET,{
+    download:true,
+    complete:(res)=>{
+        if(!res.data || res.data.length < 2) return;
+
+        // סינון שורת הכותרת ושורות ריקות. מיפוי ישיר: עמודה א' שם, עמודה ב' קישור.
+        data = res.data.slice(1)
+            .filter(r => r[0] && r[0].trim() !== "" && r[1] && r[1].trim() !== "")
+            .map(r => ({
+                title: r[0].trim(),
+                url: r[1].trim()
+            }));
+
+        render(data);
+    },
+    error: (err) => {
+        document.getElementById("results").innerHTML = `<div style="text-align:center; color:#ef4444; padding:40px;">שגיאה בטעינת הפרקים. ודא שהגיליון ציבורי.</div>`;
+    }
+});
+
+function openModal(){
+    document.getElementById("modal").classList.add("active");
+}
+
+function closeModal(){
+    document.getElementById("modal").classList.remove("active");
+}
+
+</script>
+
+</body>
+  </html>
